@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Stagiaire index{% endblock %}
+
+{% block body %}
+    <h1>Stagiaire index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>CreatedAt</th>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Birthday</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for stagiaire in stagiaires %}
+            <tr>
+                <td>{{ stagiaire.id }}</td>
+                <td>{{ stagiaire.createdAt ? stagiaire.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ stagiaire.name }}</td>
+                <td>{{ stagiaire.phone }}</td>
+                <td>{{ stagiaire.birthday ? stagiaire.birthday|date('Y-m-d') : '' }}</td>
+                <td>
+                    <a href="{{ path('stagiaire_show', {'id': stagiaire.id}) }}">Voir</a>
+                    <a href="{{ path('stagiaire_edit', {'id': stagiaire.id}) }}">Modifier</a>
+                    {{ include('Admin/stagiaire/_delete_form.html.twig') }}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('stagiaire_new') }}">Create new</a>
+{% endblock %}

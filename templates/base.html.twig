@@ -13,6 +13,33 @@
             {#{{ encore_entry_script_tags('app') }}#}
         {% endblock %}
     </head>
+<style>
+    th, td {
+        border: solid 1px;
+    }
+
+    table {
+        border-collapse: collapse;
+    }
+</style>
+    <ul>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ path('home') }}">Home</a>
+        </li>
+    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+        <li class="nav-item">
+            <a class="nav-link" href="{{ path('app_logout') }}">Logout</a>
+        </li>
+        <li class="nav-item ">
+            <a class="nav-link" href="{{ path('dashboard') }}">Dashboard</a>
+        </li>
+    {% else %}
+        <li class="nav-item text-lg-end">
+            <a class="nav-link" href="{{ path('app_login') }}">Login</a>
+        </li>
+    {% endif %}
+    </ul>
+
     <body>
         {% block body %}{% endblock %}
     </body>
